@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+    <record id="inherit_hr_equipment_view_form" model="ir.ui.view">
+        <field name="name">inherit_hr_equipment_view_form</field>
+        <field name="model">maintenance.equipment</field>
+        <!-- Please veryfiy, that the following inherited view really sticks to the naming convention. -->
+        <field name="inherit_id" ref="maintenance.hr_equipment_view_form" />
+        <!-- <field name="type">tree</field>
+        <field name="mode">primary|extension</field>
+        <field name="priority" eval="16" />
+        <field name="active" eval="True" /> -->
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='location']" position="after">
+                <field name="brand_id" />
+                <field name="category_iid" />
+                <field name="class_mainten_id" />
+                <field name="model_mainten_id" />
+                <field name="site_id" />
+                <field name="description" />
+                <field name="tire_s_n" />
+                <field name="position" />
+            </xpath>
+            <xpath expr="/form/sheet/notebook/page[@name='product_information']" position="after">
+                <page string="General Information" >
+                    <group>
+                        <group>
+                            <field name="machine_code_id" />
+                            <field name="machine_type_id" />
+                            <field name="machine_category_id" />
+                            <field name="machine_group_id" />
+                        </group>
+                        <group>
+                            <field name="serial_number_id" />
+                            <field name="manufacturing_year" />
+                        </group>
+                    </group>
+                    <group>
+                        <group>
+                            <label for="width"/>
+                            <div class="o_row">
+                                <field name="width" /> cm
+                            </div>
+                            <label for="length"/>
+                            <div class="o_row">
+                                <field name="length" /> cm
+                            </div>
+                            <label for="height"/>
+                            <div class="o_row">
+                                <field name="height" /> cm
+                            </div>
+                            <label for="weight"/>
+                            <div class="o_row">
+                                <field name="weight" /> ton
+                            </div>
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+    </data>
+</odoo>

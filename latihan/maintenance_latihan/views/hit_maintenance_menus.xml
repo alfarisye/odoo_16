@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <menuitem
+        id="maintenance_transfer_unit"
+        name="Transfer Unit" 
+        parent="maintenance.menu_m_request"
+        action="action_transfer_unit_act_window"
+        />
+
+        <!-- congfigurasi -->
+
+        <menuitem
+        id="maintenance_brand_configuration"
+        name="Brand" 
+        parent="maintenance.menu_maintenance_configuration"
+        action="action_brand_act_window"
+        />
+
+        <menuitem
+        id="maintenance_category_configuration"
+        name="Category" 
+        parent="maintenance.menu_maintenance_configuration"
+        action="action_category_act_window"
+        />
+
+        <menuitem
+        id="maintenance_class_mainten_configuration"
+        name="Class" 
+        parent="maintenance.menu_maintenance_configuration"
+        action="action_class_mainten_act_window"
+        />
+
+        <menuitem
+        id="maintenance_model_mainten_configuration"
+        name="Model" 
+        parent="maintenance.menu_maintenance_configuration"
+        action="action_model_mainten_act_window"
+        />
+
+        <menuitem
+        id="maintenance_site_configuration"
+        name="Site" 
+        parent="maintenance.menu_maintenance_configuration"
+        action="action_site_act_window"
+        />
+
+        <menuitem
+        id="maintenance_machine_code_configuration"
+        name="Machine Code" 
+        parent="maintenance.menu_maintenance_configuration"
+        action="action_machine_code_act_window"
+        />
+
+        <menuitem
+        id="maintenance_machine_type_configuration"
+        name="Machine Type" 
+        parent="maintenance.menu_maintenance_configuration"
+        action="action_machine_type_act_window"
+        />
+
+        <menuitem
+        id="maintenance_machine_category_configuration"
+        name="Machine Category" 
+        parent="maintenance.menu_maintenance_configuration"
+        action="action_machine_category_act_window"
+        />
+
+        <menuitem
+        id="maintenance_machine_group_configuration"
+        name="Machine Group" 
+        parent="maintenance.menu_maintenance_configuration"
+        action="action_machine_group_act_window"
+        />
+
+       
+
+    </data>
+</odoo>
