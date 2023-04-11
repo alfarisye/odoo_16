@@ -83,6 +83,8 @@ class HitConditionMonitoring(models.Model):
     accumulative_hourmeter = fields.Integer(string='Accumulative Hourmeter')
     accumulative_kilomater = fields.Integer(string='Accumulative Kilometer')
 
+    stage_id = fields.Selection(string='warranty_type', selection=[('draf', 'Draf'), ('inprogress', 'In Progress'), ('done', 'Done')])
+
 
     @api.model_create_multi
     def create(self, vals_list):
