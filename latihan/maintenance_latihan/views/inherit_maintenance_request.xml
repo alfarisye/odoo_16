@@ -20,6 +20,18 @@
                 <field name='demage_id'/>
                 <field name='cause_id'/>
             </xpath>
+            <xpath expr="/form/sheet/group" position="after">
+                <notebook>
+                    <page string='Planning'>
+                        <group>
+                            <field name="schedule_start" />
+                            <field name="schedule_finish" />
+                            <field name="actual_start" />
+                            <field name="actual_finish" />
+                        </group>
+                    </page>
+                </notebook>
+            </xpath>
         </field>
     </record>
     </data>

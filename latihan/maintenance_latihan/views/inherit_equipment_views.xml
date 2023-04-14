@@ -12,17 +12,19 @@
         <field name="priority" eval="16" />
         <field name="active" eval="True" /> -->
         <field name="arch" type="xml">
-            <xpath expr="//field[@name='location']" position="after">
+            <xpath expr="//field[@name='category_id']" position="after">
                 <field name="brand_id" />
                 <field name="category_iid" />
                 <field name="class_mainten_id" />
                 <field name="model_mainten_id" />
-                <field name="site_id" />
                 <field name="description" />
                 <field name="tire_s_n" />
                 <field name="position" />
             </xpath>
-            <xpath expr="/form/sheet/notebook/page[@name='product_information']" position="after">
+            <xpath expr="//field[@name='maintenance_team_id']" position="before">
+                <field name="site_id" />
+            </xpath>
+            <xpath expr="/form/sheet/notebook/page[@name='description']" position="before">
                 <page string="General Information" >
                     <group>
                         <group>
@@ -34,11 +36,14 @@
                         <group>
                             <field name="serial_number_id" />
                             <field name="manufacturing_year" />
+                            <field name="age_id"/>
+                            <field name="target_id"/>
+                            <!-- <field name='accumulative_hourmeter_id'></field> -->
                         </group>
                     </group>
                     <group>
                         <group>
-                            <label for="width"/>
+                            <label for="width"/>z
                             <div class="o_row">
                                 <field name="width" /> cm
                             </div>
@@ -55,7 +60,41 @@
                                 <field name="weight" /> ton
                             </div>
                         </group>
+                        <group>
+                            <label for="hourmeter_1"/>
+                            <div class="o_row">
+                                <field name="hourmeter_1" /> 
+                            </div>
+                            <label for="kilometer"/>
+                            <div class="o_row">
+                                <field name="kilometer" /> 
+                            </div>
+                            <label for="accumulative_hourmeter_id"/>
+                            <div class="o_row">
+                                <field name="accumulative_hourmeter_id" /> 
+                            </div>
+                            <label for="accumulative_kilometer_id"/>
+                            <div class="o_row">
+                                <field name="accumulative_kilometer_id" /> 
+                            </div>
+                            <label for="target_id"/>
+                            <div class="o_row">
+                                <field name="target_id" />
+                            </div>
+                        </group>
                     </group>
+                </page>
+                <page string='Maintenance History'>
+                    <field name="equipment_master_list_ids" readonly="1">
+                        <tree>
+                            <field name="work_order_type"/>
+                            <field name="maintenance_type"/>
+                            <field name="description"/>
+                            <field name="site_id"/>
+                            <field name="demage_id"/>
+                            <field name="cause_id"/>
+                        </tree>
+                    </field>
                 </page>
             </xpath>
         </field>
