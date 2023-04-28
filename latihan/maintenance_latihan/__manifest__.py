@@ -39,10 +39,14 @@
         'views/machine_group_views.xml',
         'views/transfer_unit_views.xml',
         'views/service_type_views.xml',
+        'views/measuring_reading_views.xml',
         'views/inherit_equipment_views.xml',
         'views/inherit_maintenance_request.xml',
         'views/equipments_menu_views.xml',
         'views/hit_maintenance_menus.xml',
+
+        'wizard/account_change_lock_date.xml',
+        'wizard/site_place_views.xml',
     ],
     # only loaded in demonstration mode
     'demo': [],

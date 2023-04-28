@@ -10,7 +10,8 @@ class TransferUnit(models.Model):
     site_id = fields.Many2one(comodel_name='site', string='Site Origin')
     effective_date = fields.Date('Effective Date')
 
-    transfer_unit_master = fields.Many2one(comodel_name='hit.condition.monitoring', 
+    transfer_unit_master = fields.Many2one(comodel_name='maintenance.equipment', 
                                             string='Transfer Master List')
     
-   
+    unit_id = fields.Many2one(
+        comodel_name='maintenance.equipment', string='Unit ID/Component ID', realate='unit_id.name')

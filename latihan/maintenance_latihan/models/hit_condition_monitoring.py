@@ -22,6 +22,10 @@ class HitConditionMonitoring(models.Model):
         comodel_name='model.mainten', string='Model')
     site_id = fields.Many2one(
         comodel_name='site', string='Site')
+    
+    unit_id = fields.Many2one(
+        comodel_name='maintenance.equipment', string='Unit', realate='unit_id.name')
+    
     description = fields.Char(string='Description')
     height = fields.Float(string='Height')
     length = fields.Float(string='Length')
@@ -44,6 +48,8 @@ class HitConditionMonitoring(models.Model):
     parent_id = fields.Selection(
         string='Parent', selection=[('Pre - Maintenance', 'Schedule'), ('Repair', 'Unschedule'),
                                                      ('Servicing', 'Schedule'),  ('Backlog', 'Schedule')])
+    
+    attachment_id = fields.Binary('attachment')
     category_text = fields.Char(string='Category')
     brand_text = fields.Char(string='Brand')
     model_text = fields.Char(string='Model')
@@ -73,12 +79,12 @@ class HitConditionMonitoring(models.Model):
                 record.age_id = 0
 
     hourmater_id = fields.Many2one(
-        comodel_name='measuring.utilization', string='Hourmater')
+        comodel_name='measuring.reading', string='Hourmater')
     kilometer_id = fields.Many2one(
-        comodel_name='measuring.utilization', string='Kilometer')
+        comodel_name='measuring.reading', string='Kilometer')
     
-    hourmater = fields.Integer(string="Hourmater", related='hourmater_id.hourmeter')
-    kilomater = fields.Integer(string="Kilometer", related='kilometer_id.kilometer')
+    hourmater = fields.Integer(string="Hourmater")
+    kilomater = fields.Integer(string="Kilometer")
 
     accumulative_hourmeter = fields.Integer(string='Accumulative Hourmeter')
     accumulative_kilomater = fields.Integer(string='Accumulative Kilometer')

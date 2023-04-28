@@ -37,6 +37,7 @@
                         <br/>
                         <group>
                             <group>
+                                    <field name="unit_id"></field>
                                     <field name="brand_id" />
                                     <field name="category_iid" />
                                     <field name="class_mainten_id" />
@@ -105,7 +106,7 @@
                         <page string='Maintenance History'>
                             <field name="equipment_master_list_ids" readonly="1">
                                 <tree>
-                                    <field name="work_order_type"/>
+                                    <field name="work_order_type1"/>
                                     <field name="maintenance_type"/>
                                     <field name="description"/>
                                     <field name="site_id"/>
@@ -150,7 +151,7 @@
                             </group>
                         </page>
                         <page string='Component Position'>
-
+                            <field name="attachment_id"></field>
                         </page>
                     </notebook>
                     </sheet>
@@ -200,6 +201,13 @@
         name="Service Type" 
         parent="maintenance.menu_equipment_form"
         action="action_service_type_act_window"
+        />
+
+        <menuitem
+        id="measuring_reading_maintenance"
+        name="Measuring Reading" 
+        parent="maintenance.menu_equipment_form"
+        action="action_measuring_reading_act_window"
         />
     </data>
 </odoo>

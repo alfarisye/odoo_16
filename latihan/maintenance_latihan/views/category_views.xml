@@ -43,6 +43,7 @@
                     </div>
                     <group>
                         <group name="equipment" string="Equipment">
+                            <field name="unit_id"></field>
                             <field name="active" widget="boolean_toggle"/>
                         </group>
                         <group name="details" string="Details">

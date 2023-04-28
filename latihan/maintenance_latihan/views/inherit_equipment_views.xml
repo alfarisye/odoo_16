@@ -12,17 +12,19 @@
         <field name="priority" eval="16" />
         <field name="active" eval="True" /> -->
         <field name="arch" type="xml">
-            <xpath expr="//field[@name='location']" position="after">
+            <xpath expr="//field[@name='category_id']" position="after">
                 <field name="brand_id" />
                 <field name="category_iid" />
                 <field name="class_mainten_id" />
                 <field name="model_mainten_id" />
-                <field name="site_id" />
                 <field name="description" />
                 <field name="tire_s_n" />
                 <field name="position" />
             </xpath>
-            <xpath expr="/form/sheet/notebook/page[@name='product_information']" position="after">
+            <xpath expr="//field[@name='maintenance_team_id']" position="before">
+                <field name="site_id" />
+            </xpath>
+            <xpath expr="/form/sheet/notebook/page[@name='description']" position="before">
                 <page string="General Information" >
                     <group>
                         <group>
@@ -34,11 +36,14 @@
                         <group>
                             <field name="serial_number_id" />
                             <field name="manufacturing_year" />
+                            <field name="age_id"/>
+                            <field name="target_id"/>
+                            <!-- <field name='accumulative_hourmeter_id'></field> -->
                         </group>
                     </group>
                     <group>
                         <group>
-                            <label for="width"/>
+                            <label for="width"/>z
                             <div class="o_row">
                                 <field name="width" /> cm
                             </div>
@@ -55,9 +60,92 @@
                                 <field name="weight" /> ton
                             </div>
                         </group>
+                        <group>
+                            <label for="hourmeter_1"/>
+                            <div class="o_row">
+                                <field name="hourmeter_1" /> 
+                            </div>
+                            <label for="kilometer"/>
+                            <div class="o_row">
+                                <field name="kilometer" /> 
+                            </div>
+                            <label for="accumulative_hourmeter_id"/>
+                            <div class="o_row">
+                                <field name="accumulative_hourmeter_id" /> 
+                            </div>
+                            <label for="accumulative_kilometer_id"/>
+                            <div class="o_row">
+                                <field name="accumulative_kilometer_id" /> 
+                            </div>
+                            <label for="target_id"/>
+                            <div class="o_row">
+                                <field name="target_id" />
+                            </div>
+                        </group>
                     </group>
                 </page>
+                <page string='Maintenance History'>
+                    <field name="equipment_master_list_ids" readonly="1">
+                        <tree>
+                            <field name="work_order_type1"/>
+                            <field name="maintenance_type"/>
+                            <field name="description"/>
+                            <field name="site_id"/>
+                            <field name="demage_id"/>
+                            <field name="cause_id"/>
+                        </tree>
+                    </field>
+                </page>
+                <page string='Transfer Information'>
+                    <field name="transfer_unit_ids" readonly="1">
+                        <tree>
+                            <field name="site_id"/>
+                            <field name="effective_date"/>
+                        </tree>
+                    </field>
+                </page>
+                <page string='Parent Information'>
+                    <group>
+                        <field name="eqip_parent_ids"/>
+                        <field name="brand_text"/>
+                        <field name="category_text"/>
+                        <field name="class_text"/>
+                        <field name="model_text"/>
+                    </group>
+                </page>
+                <page string='Tire Information'>
+                    <field name="tire_information_ids" readonly="1">
+                        <tree>
+                            <field name="tire_s_n"/>
+                            <field name="position"/>
+                        </tree>
+                    </field>
+                </page>
+                <page string='Warranty'>
+                    <group>
+                        <field name="warranty_type"/>
+                        <field name="start_date"/>
+                        <field name="end_date"/>
+                        <field name="hourmater_ids"/>
+                        <field name="Kilometer_ids"/>
+                    </group>
+                </page>
+                <page string='Component Position'>
+                    <field name="attachment_id"></field>
+                </page>
             </xpath>
+            <xpath expr="//form[1]/sheet[1]/notebook[1]/page[@name='description']" position="attributes">
+                <attribute name="attrs">{}</attribute>
+                <attribute name="invisible">1</attribute>
+              </xpath>
+              <xpath expr="//page[@name='product_information']" position="attributes">
+                <attribute name="attrs">{}</attribute>
+                <attribute name="invisible">1</attribute>
+              </xpath>
+              <xpath expr="//form[1]/sheet[1]/notebook[1]/page[@name='maintenance']" position="attributes">
+                <attribute name="attrs">{}</attribute>
+                <attribute name="invisible">1</attribute>
+              </xpath>
         </field>
     </record>
     </data>
