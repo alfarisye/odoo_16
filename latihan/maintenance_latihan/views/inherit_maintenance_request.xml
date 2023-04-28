@@ -13,7 +13,7 @@
         <field name="active" eval="True" /> -->
         <field name="arch" type="xml">
             <xpath expr="//field[@name='equipment_id']" position="after">
-                <field widget="radio" name="work_order_type"/>
+                <field widget="radio" name="work_order_type1"/>
             </xpath>
             <xpath expr="//field[@name='priority']" position="after">
                 <field name="site_id"/>
@@ -28,6 +28,8 @@
                             <field name="schedule_finish" />
                             <field name="actual_start" />
                             <field name="actual_finish" />
+                            <field name="hourmeter_1" />
+                            <field name="kilometer" />
                         </group>
                     </page>
                 </notebook>

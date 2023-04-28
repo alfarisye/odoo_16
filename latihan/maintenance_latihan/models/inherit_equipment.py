@@ -36,18 +36,25 @@ class InheritEquipment(models.Model):
                                                  string='Equipment Tire Information')
     
     target_id = fields.Many2one(comodel_name='service.type', string='Target')
-    equipment_master_list_ids = fields.One2many('maintenance.request', 'equipment_master_list', string='Work Order Type')
     transfer_unit_ids = fields.One2many('transfer.unit', 'transfer_unit_master', string='Transfer Unit')
-    parent_id = fields.Selection(
-        string='Parent', selection=[('Pre - Maintenance', 'Schedule'), ('Repair', 'Unschedule'),
-                                                     ('Servicing', 'Schedule'),  ('Backlog', 'Schedule')])
+
+
+    eqip_parent_ids = fields.Many2one(comodel_name='maintenance.equipment', string='Parent ID')
     
+    # category_text = fields.Many2one(
+    #     comodel_name='category', related='eqip_parent_ids.category_iid')
+    # brand_text = fields.Many2one(comodel_name='brand', related='eqip_parent_ids.brand_id')
+    # model_text = fields.Many2one(comodel_name='model.mainten', related='eqip_parent_ids.model_mainten_id')
+    # class_text = fields.Many2one(comodel_name='class.mainten', related='eqip_parent_ids.class_mainten_id')
+
+    category_text = fields.Many2one(comodel_name='category')
+    brand_text = fields.Many2one(comodel_name='brand')
+    model_text = fields.Many2one(comodel_name='model.mainten')
+    class_text = fields.Many2one(comodel_name='class.mainten')
+
     attachment_id = fields.Binary('attachment')
-    category_text = fields.Char(string='Category')
-    brand_text = fields.Char(string='Brand')
-    model_text = fields.Char(string='Model')
-    class_text = fields.Char(string='Class')
-    name_text = fields.Char(string='Name')
+    
+    
 
     warranty_type = fields.Selection(
         string='warranty_type', selection=[('Pre - Maintenance', 'Schedule'), ('Repair', 'Unschedule')])
@@ -81,15 +88,38 @@ class InheritEquipment(models.Model):
     kilometer = fields.Integer(string="Kilometer", compute="_compute_fields")
     hourmeter_1 = fields.Integer('Hourmeter', compute="_compute_fields")
 
-    
-    def _compute_fields(self):
+    equipment_master_list_ids = fields.One2many('maintenance.request', 'equipment_master_list', string='Work Order Type', compute='_compute_work_order')
+    transfer_unit_ids = fields.One2many('transfer.unit', 'transfer_unit_master', string='Transfer Unit', compute='_compute_transfer_information')
+
+    def _compute_work_order(self):
         for yes in self:
-            reading_ids = self.env['measuring.reading'].sudo().search([('unit_id', '=', yes.id)])
-            for reading in reading_ids:
-                hour_util = self.env['measuring.utilization'].sudo().search([('utilization_id', '=', reading.id), ('measuring_type', '=', 'hourmeter')], order="date_measuring desc", limit=1)
-                yes.hourmeter_1 = hour_util.end_measuring
-                km_util = self.env['measuring.utilization'].sudo().search([('utilization_id', '=', reading.id), ('measuring_type', '=', 'kilometer')], order="date_measuring desc", limit=1)
-                yes.kilometer = km_util.end_measuring
+            reading_ids = self.env['maintenance.request'].sudo().search([('equipment_id', '=', yes.id)], order="actual_start desc", limit=5)
+            yes.equipment_master_list_ids = reading_ids
+
+    def _compute_transfer_information(self):
+        for yes in self:
+            transfer_info = self.env['transfer.unit'].sudo().search([('unit_id', '=', yes.id)])
+            yes.transfer_unit_ids = transfer_info
+
+    def _compute_fields(self):
+        for equipment in self:
+            reading_ids = self.env['measuring.reading'].sudo().search([('unit_id', '=', equipment.id)])
+            if not reading_ids:
+                equipment.hourmeter_1 = 0
+                equipment.kilometer = 0
+                continue
+
+            hour_util = self.env['measuring.utilization'].sudo().search([('utilization_id', '=', reading_ids[0].id), ('measuring_type', '=', 'hourmeter')], order="date_measuring desc", limit=1)
+            if not hour_util:
+                equipment.hourmeter_1 = 0
+            else:
+                equipment.hourmeter_1 = hour_util.end_measuring
+
+            km_util = self.env['measuring.utilization'].sudo().search([('utilization_id', '=', reading_ids[0].id), ('measuring_type', '=', 'kilometer')], order="date_measuring desc", limit=1)
+            if not km_util:
+                equipment.kilometer = 0
+            else:
+                equipment.kilometer = km_util.end_measuring 
 
     # def _compute_hourmeter1(self):
     #     reading_ids = self.env['measuring.reading'].sudo().search([('unit_id', '=', self.id)])
@@ -132,6 +162,15 @@ class InheritEquipment(models.Model):
             vals.update({'name': name})
         return super(InheritEquipment, self).create(vals_list)
 
-    
+    @api.onchange('eqip_parent_ids')
+    def onchange_eqip_parent_ids(self):
+        if self.eqip_parent_ids:
+            
+            perent = self.eqip_parent_ids
+
+            self.brand_text = perent.brand_id.id
+            self.category_text = perent.category_iid.id
+            self.class_text = perent.class_mainten_id.id
+            self.model_text = perent.model_mainten_id.id
 
     # breakpoint()

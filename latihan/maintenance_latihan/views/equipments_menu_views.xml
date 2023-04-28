@@ -106,7 +106,7 @@
                         <page string='Maintenance History'>
                             <field name="equipment_master_list_ids" readonly="1">
                                 <tree>
-                                    <field name="work_order_type"/>
+                                    <field name="work_order_type1"/>
                                     <field name="maintenance_type"/>
                                     <field name="description"/>
                                     <field name="site_id"/>

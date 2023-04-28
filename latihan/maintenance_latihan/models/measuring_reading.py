@@ -13,9 +13,11 @@ class MeasuringReading(models.Model):
     
     unit_id = fields.Many2one(
         comodel_name='maintenance.equipment', string='Unit ID/Component ID', realate='unit_id.name')
+    
+    
 
-    accumulative_hourmeter = fields.Integer(string='Accumulative Hourmeter', stored=False , compute='_compute_run_time_total')
-    accumulative_kilomater = fields.Integer(string='Accumulative Kilometer', stored=False, compute='_compute_run_time_total_yes')
+    accumulative_hourmeter = fields.Integer(string='Accumulative Hourmeter', store=False , compute='_compute_run_time_total')
+    accumulative_kilomater = fields.Integer(string='Accumulative Kilometer', store=False, compute='_compute_run_time_total_yes')
 
     measuring_utilization_ids = fields.One2many('measuring.utilization', 'utilization_id')
     

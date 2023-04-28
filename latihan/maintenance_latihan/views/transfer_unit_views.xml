@@ -34,8 +34,9 @@
                     </div>
                     <group>
                         <group>
+                            <field name="unit_id"></field>
                             <field name="site_id" />
-                            <field name="effective_date" widget='daterange'/>
+                            <field name="effective_date" />
                         </group>
                         <group name="details" string="Details">
                             <field name="create_date" />

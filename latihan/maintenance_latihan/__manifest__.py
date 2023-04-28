@@ -44,6 +44,9 @@
         'views/inherit_maintenance_request.xml',
         'views/equipments_menu_views.xml',
         'views/hit_maintenance_menus.xml',
+
+        'wizard/account_change_lock_date.xml',
+        'wizard/site_place_views.xml',
     ],
     # only loaded in demonstration mode
     'demo': [],

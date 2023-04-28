@@ -7,4 +7,6 @@ class ClassMainten(models.Model):
 
     name = fields.Char(string='Class')
     active = fields.Boolean(string='Active', default=True)
+    unit_id = fields.Many2one(
+        comodel_name='maintenance.equipment', string='Unit ID/Component ID', realate='unit_id.name')
   

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="view_site_place_views_form" model="ir.ui.view">
+            <field name="name">site.place.form</field>
+            <field name="model">site.place</field>
+            <field name="arch" type="xml">
+                <form string="Create Site Place">
+                <sheet>
+                    <group>
+                        <field name="category_id"/>
+                        <field name="category_iid"/>
+                        <field name="brand_id"/>
+                    </group>
+                </sheet>
+                    <footer>
+                        <button name="action_generate" string="Create" type="object" class="btn-primary"/>
+                        <button name="cancel" string="Cancel" type="object" class="btn-secondary" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+        <record id="action_view_site_place_views" model="ir.actions.act_window">
+            <field name="name">Site Place</field>
+            <field name="res_model">site.place</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_site_place_views_form"/>
+            <field name="target">new</field>
+        </record>
+
+        <menuitem
+            id="menu_action_view_site_place_views"
+            name="Site Place"
+            action="action_view_site_place_views"
+            parent="maintenance.menu_m_request"/>
+    </data>
+</odoo>
